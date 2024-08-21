@@ -9,9 +9,9 @@
     <button id="startButton">Start OAuth Flow</button>
     <div id="result"></div>
     <script>
-    const authorizeEndpoint = "https://idsvr:8443/oauth/v2/oauth-authorize";
-    const tokenEndpoint = "https://idsvr:8443/oauth/v2/oauth-token";
-    const clientId = "public-test-client";
+    const authorizeEndpoint = "http://localhost:8080/oauth2/authorize";
+    const tokenEndpoint = "http://localhost:8080/oauth2/token";
+    const clientId = "public-client";
 
         if (window.location.search) {
             var args = new URLSearchParams(window.location.search);
@@ -68,9 +68,10 @@
                         client_id: clientId,
                         code_challenge_method: challengeMethod,
                         code_challenge: codeChallenge,
-                        redirect_uri: redirectUri
+                        redirect_uri: redirectUri,
+                        scope: "marketplace offline-payments"
                     });
-                window.location = authorizeEndpoint + "/?" + args;
+                window.location = authorizeEndpoint + "?" + args;
             });
         }
 
